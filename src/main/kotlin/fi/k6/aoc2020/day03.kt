@@ -1,5 +1,11 @@
 package fi.k6.aoc2020
 
+fun day03() {
+    println("--- Day 3: Toboggan Trajectory ---")
+    println("Part 1: " + day0301(map()))
+    println("Part 2: " + day0302(map()))
+}
+
 /*
 --- Day 3: Toboggan Trajectory ---
 With the toboggan login problems resolved, you set off toward the airport. While travel by toboggan might be easy, it's certainly not safe: there's very minimal steering and the area is covered in trees. You'll need to see which angles will take you near the fewest trees.
@@ -53,7 +59,7 @@ In this example, traversing the map using this slope would cause you to encounte
 
 Starting at the top-left corner of your map and following a slope of right 3 and down 1, how many trees would you encounter?
 */
-fun day0301(map: List<String>): Int {
+private fun day0301(map: List<String>): Int {
     return traverser(map, 3, 1)
 }
 
@@ -72,7 +78,7 @@ In the above example, these slopes would find 2, 7, 3, 4, and 2 tree(s) respecti
 
 What do you get if you multiply together the number of trees encountered on each of the listed slopes?
  */
-fun day0302(map: List<String>): Int {
+private fun day0302(map: List<String>): Int {
     return listOf(
         traverser(map, 1, 1),
         traverser(map, 3,1),
@@ -82,13 +88,7 @@ fun day0302(map: List<String>): Int {
     ).fold(1, { acc, i -> acc * i })
 }
 
-fun day03() {
-    println("--- Day 3: Toboggan Trajectory ---")
-    println("Part 1: " + day0301(map()))
-    println("Part 2: " + day0302(map()))
-}
-
-fun traverser(map: List<String>, right: Int, down: Int): Int {
+private fun traverser(map: List<String>, right: Int, down: Int): Int {
     var coords = Pair(0, 0)
     var trees = 0
     while (coords.second < map.lastIndex) {
@@ -100,11 +100,11 @@ fun traverser(map: List<String>, right: Int, down: Int): Int {
     return trees
 }
 
-fun main() {
+private fun main() {
     day03()
 }
 
-fun map(): List<String> {
+private fun map(): List<String> {
     val input =
         """....#..#.......#........#....#.
         ..##.#.#.#...................#.

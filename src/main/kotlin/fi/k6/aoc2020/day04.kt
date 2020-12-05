@@ -1,5 +1,11 @@
 package fi.k6.aoc2020
 
+fun day04() {
+    println("--- Day 4: Passport Processing ---")
+    println("Part 1: " + day0401(passports()))
+    println("Part 2: " + day0402(passports()))
+}
+
 /*
 --- Day 4: Passport Processing ---
 You arrive at the airport only to realize that you grabbed your North Pole Credentials instead of your passport. While these documents are extremely similar, North Pole Credentials aren't issued by a country and therefore aren't actually valid documentation for travel in most of the world.
@@ -45,7 +51,7 @@ According to the above rules, your improved system would report 2 valid passport
 
 Count the number of valid passports - those that have all required fields. Treat cid as optional. In your batch file, how many passports are valid?
  */
-fun day0401(passports: List<Map<String, String>>): Int {
+private fun day0401(passports: List<Map<String, String>>): Int {
     return passports.fold(0, { acc, passport -> if (hasValidFields(passport)) acc+1 else acc })
 }
 
@@ -115,21 +121,15 @@ eyr:2022
 iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719
 Count the number of valid passports - those that have all required fields and valid values. Continue to treat cid as optional. In your batch file, how many passports are valid?
  */
-fun day0402(passports: List<Map<String, String>>): Int {
+private fun day0402(passports: List<Map<String, String>>): Int {
     return passports.fold(0, { acc, passport -> if (hasValidContent(passport)) acc+1 else acc })
 }
 
-fun day04() {
-    println("--- Day 4: Passport Processing ---")
-    println("Part 1: " + day0401(passports()))
-    println("Part 2: " + day0402(passports()))
-}
-
-fun main() {
+private fun main() {
     day04()
 }
 
-fun hasValidFields(passport: Map<String, String>): Boolean {
+private fun hasValidFields(passport: Map<String, String>): Boolean {
     return passport.containsKey("byr") &&
             passport.containsKey("iyr") &&
             passport.containsKey("eyr") &&
@@ -139,7 +139,7 @@ fun hasValidFields(passport: Map<String, String>): Boolean {
             passport.containsKey("pid")
 }
 
-fun hasValidContent(passport: Map<String, String>): Boolean {
+private fun hasValidContent(passport: Map<String, String>): Boolean {
     if (!hasValidFields(passport)) {
         return false
     }
@@ -167,7 +167,7 @@ fun hasValidContent(passport: Map<String, String>): Boolean {
     return true
 }
 
-fun passports(): List<Map<String, String>> {
+private fun passports(): List<Map<String, String>> {
     val input =
         """eyr:2033
         hgt:177cm pid:173cm

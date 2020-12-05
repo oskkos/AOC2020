@@ -1,5 +1,11 @@
 package fi.k6.aoc2020
 
+fun day02() {
+    println("--- Day 2: Password Philosophy ---")
+    println("Part 1: " + day0201(passwordList()))
+    println("Part 2: " + day0202(passwordList()))
+}
+
 /*
 -- Day 2: Password Philosophy ---
 Your flight departs in a few days from the coastal airport; the easiest way down to the coast from here is via toboggan.
@@ -21,7 +27,7 @@ In the above example, 2 passwords are valid. The middle password, cdefg, is not;
 
 How many passwords are valid according to their policies?
 */
-fun day0201(passwordLines: List<String>): Int {
+private fun day0201(passwordLines: List<String>): Int {
     return passwordLines
         .map { str -> PasswordCandidate.fromString(str) }
         .fold(0, { acc, candidate -> if (candidate.isValidCandidateByCharOccurences()) acc + 1 else acc })
@@ -42,13 +48,13 @@ Given the same example list from above:
 2-9 c: ccccccccc is invalid: both position 2 and position 9 contain c.
 How many passwords are valid according to the new interpretation of the policies?
  */
-fun day0202(passwordLines: List<String>): Int {
+private fun day0202(passwordLines: List<String>): Int {
     return passwordLines
         .map { str -> PasswordCandidate.fromString(str) }
         .fold(0, { acc, candidate -> if (candidate.isValidCandidateByCharPositions()) acc + 1 else acc })
 }
 
-data class PasswordCandidate(private val num1: Int, private val num2: Int, private val key: Char, private val password: String) {
+private data class PasswordCandidate(private val num1: Int, private val num2: Int, private val key: Char, private val password: String) {
     companion object {
         fun fromString(line: String): PasswordCandidate {
             val splitted: List<String> = line.split(" ")
@@ -68,17 +74,11 @@ data class PasswordCandidate(private val num1: Int, private val num2: Int, priva
     }
 }
 
-fun day02() {
-    println("--- Day 2: Password Philosophy ---")
-    println("Part 1: " + day0201(passwordList()))
-    println("Part 2: " + day0202(passwordList()))
-}
-
-fun main() {
+private fun main() {
     day02()
 }
 
-fun passwordList(): List<String> {
+private fun passwordList(): List<String> {
     val input =
         """4-5 t: ftttttrvts
         7-8 k: kkkkkkkf

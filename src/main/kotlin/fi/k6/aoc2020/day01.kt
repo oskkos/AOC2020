@@ -1,5 +1,12 @@
 package fi.k6.aoc2020
 
+fun day01() {
+    println("--- Day 1: Report Repair ---")
+    println("Part 1: " + day0101(expenses()))
+    println("Part 2: " + day0102(expenses()))
+}
+
+
 /*
 --- Day 1: Report Repair ---
 After saving Christmas five years in a row, you've decided to take a vacation at a nice resort on a tropical island. Surely, Christmas will go on without you.
@@ -26,7 +33,7 @@ In this list, the two entries that sum to 2020 are 1721 and 299. Multiplying the
 
 Of course, your expense report is much larger. Find the two entries that sum to 2020; what do you get if you multiply them together?
 */
-fun day0101(expenses: List<Int>): Int {
+private fun day0101(expenses: List<Int>): Int {
     for (i in 0..expenses.lastIndex) {
         val a = expenses.get(i)
         for (j in i..expenses.lastIndex) {
@@ -45,7 +52,7 @@ Using the above example again, the three entries that sum to 2020 are 979, 366, 
 
 In your expense report, what is the product of the three entries that sum to 2020?
  */
-fun day0102(expenses: List<Int>): Int {
+private fun day0102(expenses: List<Int>): Int {
     for (i in 0..expenses.lastIndex) {
         val a = expenses.get(i)
         for (j in i..expenses.lastIndex) {
@@ -59,17 +66,11 @@ fun day0102(expenses: List<Int>): Int {
     throw error("Nothing found")
 }
 
-fun day01() {
-    println("--- Day 1: Report Repair ---")
-    println("Part 1: " + day0101(expenses()))
-    println("Part 2: " + day0102(expenses()))
-}
-
-fun main() {
+private fun main() {
     day01()
 }
 
-fun expenses(): List<Int> {
+private fun expenses(): List<Int> {
     val input =
         """1825
         1944
