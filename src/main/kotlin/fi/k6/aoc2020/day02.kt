@@ -47,6 +47,7 @@ fun day0202(passwordLines: List<String>): Int {
         .map { str -> PasswordCandidate.fromString(str) }
         .fold(0, { acc, candidate -> if (candidate.isValidCandidateByCharPositions()) acc + 1 else acc })
 }
+
 data class PasswordCandidate(private val num1: Int, private val num2: Int, private val key: Char, private val password: String) {
     companion object {
         fun fromString(line: String): PasswordCandidate {
@@ -67,11 +68,16 @@ data class PasswordCandidate(private val num1: Int, private val num2: Int, priva
     }
 }
 
-fun main() {
+fun day02() {
     println("--- Day 2: Password Philosophy ---")
     println("Part 1: " + day0201(passwordList()))
     println("Part 2: " + day0202(passwordList()))
 }
+
+fun main() {
+    day02()
+}
+
 fun passwordList(): List<String> {
     val input =
         """4-5 t: ftttttrvts

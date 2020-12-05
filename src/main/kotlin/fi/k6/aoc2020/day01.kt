@@ -58,10 +58,15 @@ fun day0102(expenses: List<Int>): Int {
     }
     throw error("Nothing found")
 }
-fun main() {
+
+fun day01() {
     println("--- Day 1: Report Repair ---")
     println("Part 1: " + day0101(expenses()))
     println("Part 2: " + day0102(expenses()))
+}
+
+fun main() {
+    day01()
 }
 
 fun expenses(): List<Int> {
