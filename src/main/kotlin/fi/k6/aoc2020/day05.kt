@@ -6,7 +6,7 @@ import kotlin.math.floor
 fun day05() {
     println("--- Day 5: Binary Boarding ---")
     println("Part 1: " + day0501(seatCodes()))
-    //println("Part 2: " + day0402(passports()))
+    println("Part 2: " + day0502(seatCodes()))
 
 }
 
@@ -50,14 +50,36 @@ BBFFBBFRLL: row 102, column 4, seat ID 820.
 As a sanity check, look through your list of boarding passes. What is the highest seat ID on a boarding pass?
  */
 private fun day0501(seatCodes: List<String>): Int =
-    seatCodes.map { seatCode -> resolveSeatId(seatCode) }.maxOrNull() ?: 0
+    seatCodes.map { seatCode -> resolveSeatId(seatCode).third }.maxOrNull() ?: 0
 
-private fun resolveSeatId(str: String): Int {
+/*
+--- Part Two ---
+Ding! The "fasten seat belt" signs have turned on. Time to find your seat.
+
+It's a completely full flight, so your seat should be the only missing boarding pass in your list. However, there's a catch: some of the seats at the very front and back of the plane don't exist on this aircraft, so they'll be missing from your list as well.
+
+Your seat wasn't at the very front or back, though; the seats with IDs +1 and -1 from yours will be in your list.
+
+What is the ID of your seat?
+ */
+private fun day0502(seatCodes: List<String>): Int {
+    val seatIds = seatCodes.map { seatCode -> resolveSeatId(seatCode).third }.sorted()
+    var previous: Int? = null
+    for (seatId in seatIds) {
+        if (previous != null && (previous + 1) < seatId ) {
+            return previous + 1
+        }
+        previous = seatId
+    }
+    throw error("Unable to resolve")
+}
+
+private fun resolveSeatId(str: String): Triple<Int, Int, Int> {
     val chars = str.toCharArray()
     val row = resolveRow(chars.sliceArray(0..6), 'F', 127)
     val column = resolveRow(chars.sliceArray(7..9), 'L', 7)
     val seatId = row * 8 + column
-    return seatId
+    return Triple(row, column, seatId)
 }
 private fun resolveRow(rowInstructions: CharArray, lowerChar: Char, max: Int): Int {
     var x_high = max
